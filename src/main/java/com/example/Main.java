@@ -23,27 +23,36 @@ public class Main {
         Size frameSize = new Size((int) cap1.get(Videoio.CAP_PROP_FRAME_WIDTH),
                                   (int) cap1.get(Videoio.CAP_PROP_FRAME_HEIGHT));
         int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
-        VideoWriter writer = new VideoWriter("output1.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
+        VideoWriter writer1 = new VideoWriter("merged.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
+                                             frameSize, true);
+        VideoWriter writer2 = new VideoWriter("cliped.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
                                              frameSize, true);
 
         Mat frame = new Mat();
+        int frameCount = 0;
+        int fps = (int) cap1.get(Videoio.CAP_PROP_FPS);
 
         // Merge video1
         while (cap1.read(frame)) {
             if (!frame.empty()) {
-                writer.write(frame);
+                frameCount++;
+                if (frameCount <= fps * 2) {
+                    writer2.write(frame);
+                }
+                writer1.write(frame);
             }
         }
 
         // Merge video2
         while (cap2.read(frame)) {
             if (!frame.empty()) {
-                writer.write(frame);
+                writer1.write(frame);
             }
         }
 
         cap1.release();
         cap2.release();
-        writer.release();
+        writer1.release();
+        writer2.release();
     }
 }

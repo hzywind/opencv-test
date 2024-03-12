@@ -23,9 +23,9 @@ public class Main {
         Size frameSize = new Size((int) cap1.get(Videoio.CAP_PROP_FRAME_WIDTH),
                                   (int) cap1.get(Videoio.CAP_PROP_FRAME_HEIGHT));
         int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
-        VideoWriter writer1 = new VideoWriter("merged.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
+        VideoWriter writer1 = new VideoWriter("merged-java.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
                                              frameSize, true);
-        VideoWriter writer2 = new VideoWriter("cliped.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
+        VideoWriter writer2 = new VideoWriter("cliped-java.avi", fourcc, cap1.get(Videoio.CAP_PROP_FPS),
                                              frameSize, true);
 
         Mat frame = new Mat();

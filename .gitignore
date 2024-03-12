@@ -32,4 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
+### Python ###
+__pycache__/
+venv/
+
+### Project Specific ###
 *.avi
+*.mp3
